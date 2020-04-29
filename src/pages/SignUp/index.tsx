@@ -14,7 +14,7 @@ const SignUp: React.FC = () => {
   }
 
   /*
-    Inicializar input com defaultValue
+    Initialize input with defaultValue
     <Form initialData={{ name: 'Matheus' }} onSubmit={handleSubmit}>
   */
   return (
