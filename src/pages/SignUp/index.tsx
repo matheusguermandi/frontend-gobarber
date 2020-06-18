@@ -26,10 +26,11 @@ interface SignUpFormData {
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
+
   const history = useHistory();
 
   const handleSubmit = useCallback(
-    async (data: object) => {
+    async (data: SignUpFormData) => {
       try {
         formRef.current?.setErrors({});
 
