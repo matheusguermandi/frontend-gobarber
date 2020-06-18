@@ -1,5 +1,5 @@
-import React, { useCallback, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useCallback, useRef, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { FiLogIn, FiMail } from 'react-icons/fi';
 import * as Yup from 'yup';
 
@@ -15,6 +15,7 @@ import logoImg from '../../assets/logo.svg';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import { Container, Content, Background, AnimationContainer } from './styles';
+import api from '../../services/api';
 
 interface ForgotPasswordFormData {
   email: string;
@@ -24,6 +25,8 @@ const ForgotPassword: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
   const { addToast } = useToast();
+
+  const history = useHistory();
 
   const handleSubmit = useCallback(
     async (data: ForgotPasswordFormData) => {
@@ -40,7 +43,17 @@ const ForgotPassword: React.FC = () => {
           abortEarly: false,
         });
 
-        // history.push('');
+        await api.post('/password/forgot', {
+          email: data.email,
+        });
+
+        addToast({
+          type: 'success',
+          title: 'E-mail de recuperação enviado',
+          description: 'Confira sua caixa de entrada',
+        });
+
+        history.push('/');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -77,7 +90,7 @@ const ForgotPassword: React.FC = () => {
             <Button type="submit">Recuperar</Button>
           </Form>
 
-          <Link to="/signin">
+          <Link to="/">
             <FiLogIn />
             Voltar ao login
           </Link>
