@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { FiLock } from 'react-icons/fi';
 import * as Yup from 'yup';
 
@@ -15,6 +15,7 @@ import logoImg from '../../assets/logo.svg';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import { Container, Content, Background, AnimationContainer } from './styles';
+import api from '../../services/api';
 
 interface ResetPasswordFormData {
   password: string;
@@ -28,6 +29,8 @@ const ResetPassword: React.FC = () => {
 
   const history = useHistory();
 
+  const location = useLocation();
+
   const handleSubmit = useCallback(
     async (data: ResetPasswordFormData) => {
       try {
@@ -35,7 +38,7 @@ const ResetPassword: React.FC = () => {
 
         const schema = Yup.object().shape({
           password: Yup.string().required('Senha obrigatória'),
-          passwordConfirmation: Yup.string().oneOf(
+          password_confirmation: Yup.string().oneOf(
             [Yup.ref('password'), null],
             'Confirmação incorreta',
           ),
@@ -45,7 +48,20 @@ const ResetPassword: React.FC = () => {
           abortEarly: false,
         });
 
-        // history.push('/dashboard');
+        const { password, password_confirmation } = data;
+        const token = location.search.replace('?token=', '');
+
+        if (!token) {
+          throw new Error();
+        }
+
+        await api.post('/password/reset', {
+          password,
+          password_confirmation,
+          token,
+        });
+
+        history.push('/');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -60,7 +76,7 @@ const ResetPassword: React.FC = () => {
         });
       }
     },
-    [addToast, history],
+    [addToast, history, location.search],
   );
 
   return (
