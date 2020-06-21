@@ -1,84 +1,60 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
-/* polished -> Utilizado para manipulação de cores */
 import { shade } from 'polished';
 
-import signInBackground from '../../assets/sign-in-background.png';
+export const Container = styled.div``;
 
-export const Container = styled.div`
-  height: 100vh;
-  display: flex;
-  align-items: stretch;
+export const Header = styled.header`
+  padding: 32px 0;
+  background-color: #28262e;
 `;
 
-export const Content = styled.div`
+export const HeaderContent = styled.div`
+  max-width: 1120px;
+  margin: 0 auto;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-
-  width: 100%;
-  max-width: 700px;
-`;
-
-const appearFromLeft = keyframes`
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
+  > img {
+    height: 80px;
   }
-  to {
-    opacity: 1;
-    transform: translateX(0px);
-  }
-`;
-
-export const AnimationContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  animation: ${appearFromLeft} 1s;
-
-  form {
-    margin: 80px 0;
-    width: 340px;
-    text-align: center;
-    h1 {
-      margin-bottom: 24px;
+  button {
+    margin-left: auto;
+    background: transparent;
+    border: 0;
+    svg {
+      color: #999591;
+      width: 20px;
+      height: 20px;
     }
+  }
+`;
 
-    a {
+export const Profile = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 80px;
+  img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+    line-height: 24px;
+    span {
       color: #f4ede8;
-      display: block;
-      margin-top: 24px;
+    }
+    strong {
+      color: #ff9000;
+    }
+    a {
       text-decoration: none;
-      transition: color 0.2s;
+      color: #ff9000;
       &:hover {
-        color: ${shade(0.2, '#f4ede8')};
+        opacity: 0.8;
       }
     }
   }
-
-  > a {
-    color: #ff9000;
-    display: block;
-    margin-top: 24px;
-    text-decoration: none;
-    transition: color 0.2s;
-    display: flex;
-    align-items: center;
-    svg {
-      margin-right: 16px;
-    }
-    &:hover {
-      color: ${shade(0.2, '#ff9000')};
-    }
-  }
-`;
-
-export const Background = styled.div`
-  flex: 1;
-  background: url(${signInBackground}) no-repeat center;
-  background-size: cover;
 `;
