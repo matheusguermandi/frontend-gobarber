@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FiPower } from 'react-icons/fi';
+import { FiPower, FiClock } from 'react-icons/fi';
 
 import {
   Container,
@@ -9,8 +9,8 @@ import {
   Profile,
   Content,
   Schedule,
-  Calendar,
   NextAppointment,
+  Calendar,
 } from './styles';
 
 import logoImg from '../../assets/logo.svg';
@@ -43,10 +43,24 @@ const Dashboard: React.FC = () => {
           <h1>Horários agendados</h1>
           <p>
             <span>Hoje</span>
-            <span>dia 06</span>
+            <span>Dia 06</span>
             <span>Segunda-Feira</span>
           </p>
-          <NextAppointment />
+          <NextAppointment>
+            <strong>Atendimento a seguir</strong>
+            <div>
+              <img
+                src="https://avatars2.githubusercontent.com/u/27836893?s=460&u=4d9a53c02a3d30c2e61c992f9ba603547129bfe0&v=4"
+                alt="Matheus Guermandi"
+              />
+
+              <strong>Matheus Guermandi</strong>
+              <span>
+                <FiClock />
+                08:00h
+              </span>
+            </div>
+          </NextAppointment>
         </Schedule>
         <Calendar />
       </Content>
