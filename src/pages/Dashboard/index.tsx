@@ -10,6 +10,7 @@ import {
   Content,
   Schedule,
   Calendar,
+  NextAppointment,
 } from './styles';
 
 import logoImg from '../../assets/logo.svg';
@@ -38,7 +39,15 @@ const Dashboard: React.FC = () => {
       </Header>
 
       <Content>
-        <Schedule />
+        <Schedule>
+          <h1>Horários agendados</h1>
+          <p>
+            <span>Hoje</span>
+            <span>dia 06</span>
+            <span>Segunda-Feira</span>
+          </p>
+          <NextAppointment />
+        </Schedule>
         <Calendar />
       </Content>
     </Container>
