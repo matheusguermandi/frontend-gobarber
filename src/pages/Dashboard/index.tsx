@@ -28,6 +28,12 @@ const Dashboard: React.FC = () => {
           </button>
         </HeaderContent>
       </Header>
+
+      <Content>
+        <Schedule />
+
+        <Calendar />
+      </Content>
     </Container>
   );
 };
