@@ -102,6 +102,7 @@ export const NextAppointment = styled.div`
     font-size: 20px;
     font-weight: 400;
   }
+
   div {
     background: #3e3b47;
     display: flex;
@@ -110,6 +111,7 @@ export const NextAppointment = styled.div`
     border-radius: 10px;
     margin-top: 24px;
     position: relative;
+
     &::before {
       position: absolute;
       height: 80%;
@@ -119,15 +121,18 @@ export const NextAppointment = styled.div`
       content: '';
       background: #ff9000;
     }
+
     img {
       width: 80px;
       height: 80px;
       border-radius: 50%;
     }
+
     strong {
       margin-left: 24px;
       color: #fff;
     }
+
     span {
       margin-left: auto;
       display: flex;
