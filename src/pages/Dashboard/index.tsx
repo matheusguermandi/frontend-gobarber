@@ -2,7 +2,15 @@ import React from 'react';
 
 import { FiPower } from 'react-icons/fi';
 
-import { Container, Header, HeaderContent, Profile } from './styles';
+import {
+  Container,
+  Header,
+  HeaderContent,
+  Profile,
+  Content,
+  Schedule,
+  Calendar,
+} from './styles';
 
 import logoImg from '../../assets/logo.svg';
 import { useAuth } from '../../hooks/auth';
@@ -31,7 +39,6 @@ const Dashboard: React.FC = () => {
 
       <Content>
         <Schedule />
-
         <Calendar />
       </Content>
     </Container>
