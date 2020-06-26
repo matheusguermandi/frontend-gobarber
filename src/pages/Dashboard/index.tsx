@@ -108,7 +108,23 @@ const Dashboard: React.FC = () => {
           </Section>
         </Schedule>
         <Calendar>
-          <DayPicker weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D']} />
+          <DayPicker
+            weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D']}
+            months={[
+              'Janeiro',
+              'Fevereiro',
+              'Março',
+              'Abril',
+              'Maio',
+              'Junho',
+              'Julho',
+              'Agosto',
+              'Setembro',
+              'Outubro',
+              'Novembro',
+              'Dezembro',
+            ]}
+          />
         </Calendar>
       </Content>
     </Container>
