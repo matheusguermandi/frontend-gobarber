@@ -108,7 +108,7 @@ const Dashboard: React.FC = () => {
           </Section>
         </Schedule>
         <Calendar>
-          <DayPicker />
+          <DayPicker weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D']} />
         </Calendar>
       </Content>
     </Container>
