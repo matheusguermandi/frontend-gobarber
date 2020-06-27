@@ -14,13 +14,16 @@ export const HeaderContent = styled.div`
   margin: 0 auto;
   display: flex;
   align-items: center;
+
   > img {
     height: 80px;
   }
+
   button {
     margin-left: auto;
     background: transparent;
     border: 0;
+
     svg {
       color: #999591;
       width: 20px;
@@ -43,12 +46,15 @@ export const Profile = styled.div`
     flex-direction: column;
     margin-left: 16px;
     line-height: 24px;
+
     span {
       color: #f4ede8;
     }
+
     strong {
       color: #ff9000;
     }
+
     a {
       text-decoration: none;
       color: #ff9000;
