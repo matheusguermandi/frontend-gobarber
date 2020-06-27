@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import { isToday, format } from 'date-fns';
+import { parseISO } from 'date-fns/esm';
 import ptBR from 'date-fns/locale/pt-BR';
 import DayPicker, { DayModifiers } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
@@ -28,6 +29,16 @@ interface MonthAvailabilityItem {
   available: boolean;
 }
 
+interface Appointment {
+  id: string;
+  date: string;
+  hourFormatted: string;
+  user: {
+    name: string;
+    avatar_url: string;
+  };
+}
+
 const Dashboard: React.FC = () => {
   const { signOut, user } = useAuth();
 
@@ -37,6 +48,8 @@ const Dashboard: React.FC = () => {
   const [monthAvailability, setMonthAvailability] = useState<
     MonthAvailabilityItem[]
   >([]);
+
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
 
   const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
     if (modifiers.available && !modifiers.disabled) {
@@ -60,6 +73,27 @@ const Dashboard: React.FC = () => {
         setMonthAvailability(response.data);
       });
   }, [currentMonth, user.id]);
+
+  useEffect(() => {
+    api
+      .get<Appointment[]>('/appointments/me', {
+        params: {
+          year: selectedDate.getFullYear(),
+          month: selectedDate.getMonth() + 1,
+          day: selectedDate.getDate(),
+        },
+      })
+      .then(response => {
+        const appointmentsFormatted = response.data.map(appointment => {
+          return {
+            ...appointment,
+            hourFormatted: format(parseISO(appointment.date), 'HH:mm'),
+          };
+        });
+        console.log(response.data);
+        setAppointments(appointmentsFormatted);
+      });
+  }, [selectedDate]);
 
   const disabledDays = useMemo(() => {
     const dates = monthAvailability
