@@ -24,14 +24,14 @@ import api from '../../services/api';
 
 interface MonthAvailabilityItem {
   day: number;
-  availability: boolean;
+  available: boolean;
 }
 
 const Dashboard: React.FC = () => {
   const { signOut, user } = useAuth();
 
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [CurrentMonth, setCurrentMonth] = useState(new Date());
+  const [currentMonth, setCurrentMonth] = useState(new Date());
 
   const [monthAvailability, setMonthAvailability] = useState<
     MonthAvailabilityItem[]
@@ -49,29 +49,29 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     api
-      .get(`/providers/${user.id}/month.availability`, {
+      .get(`/providers/${user.id}/month-availability`, {
         params: {
-          year: CurrentMonth.getFullYear(),
-          month: CurrentMonth.getMonth() + 1,
+          month: currentMonth.getMonth() + 1,
+          year: currentMonth.getFullYear(),
         },
       })
       .then(response => {
         setMonthAvailability(response.data);
       });
-  }, [CurrentMonth, user.id]);
+  }, [currentMonth, user.id]);
 
   const disabledDays = useMemo(() => {
     const dates = monthAvailability
-      .filter(monthDay => monthDay.availability === false)
+      .filter(monthDay => monthDay.available === false)
       .map(monthDay => {
-        const year = CurrentMonth.getFullYear();
-        const month = CurrentMonth.getMonth();
+        const year = currentMonth.getFullYear();
+        const month = currentMonth.getMonth();
 
         return new Date(year, month, monthDay.day);
       });
 
     return dates;
-  }, [CurrentMonth, monthAvailability]);
+  }, [currentMonth, monthAvailability]);
 
   return (
     <Container>
